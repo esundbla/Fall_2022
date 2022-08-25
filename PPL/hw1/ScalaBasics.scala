@@ -16,7 +16,7 @@ object ScalaBasics {
     for( x <- sum to MAX){
       sum = sum + x;
     }
-    println("sum is " + sum)
+    println(f"sum is $sum")
     // TODO #3: write a conditional to display "sum is even!" or "sum is odd!" depending on the value of sum;
     if(sum % 2 == 0){
       println("sum is even!");
