@@ -42,18 +42,25 @@ int main() {
         int counter = 0;
         char basePoint;
         char reRun;
+        char pad;
 
         printf("Enter Degree of Polynomial: ");
         scanf("%d", &degree);
         printf("Basepoints? (y/n): ");
         scanf(" %c", &basePoint);
-        
+        printf("Use all 1's for coef? (y/n): ");
+        scanf(" %c", &pad);
+                
         while(counter <= degree){
             double coefInput;
             double baseInput;
-            printf("Enter %d Coeficiant: ", (counter + 1));
-            scanf("%lf", &coefInput);
-            coef[counter] = coefInput;
+            if(pad != 'y'){
+                printf("Enter %d Coeficiant: ", (counter + 1));
+                scanf("%lf", &coefInput);
+                coef[counter] = coefInput;
+            }else{
+                coef[counter] = 1;
+            }
             if(basePoint == 'y' && counter < degree){
                 //If there are basepoints add them here
                 printf("Enter %d basepoint: ", (counter +1));
