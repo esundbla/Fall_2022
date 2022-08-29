@@ -10,7 +10,7 @@ object ScalaBasics {
   def main(args: Array[String]): Unit = {
 
     // TODO #1: declare an integer constant named MAX and set it to 10; declare an integer variable named sum and initialized it to 0
-    var MAX = 10;
+    val MAX = 10;
     var sum = 0;
     // TODO #2: write a for loop to compute sum as 1 + 2 + ... + MAX; then, display "sum is ..." substituting with the value of sum (must use variable substitution)
     for( x <- sum to MAX){
