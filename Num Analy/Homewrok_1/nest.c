@@ -21,7 +21,7 @@ double nest(double coef[], double x, double basePoints[], int degree, char base)
     }
     dec = dec -2; 
     for(dec; dec >=0; dec--){
-        printf("%lf is currently", total);
+        //printf("%lf is currently", total);
         if(base == 'y'){
             total  = coef[dec] + (x + basePoints[dec-1])*total;
         }
@@ -37,12 +37,14 @@ int main() {
     while(run){
         int degree;
         double x;
-        double coef[30];
-        double basePoints[30];
+        double coef[300];
+        double basePoints[300];
         int counter = 0;
+
         char basePoint;
         char reRun;
         char pad;
+        char osc;
 
         printf("Enter Degree of Polynomial: ");
         scanf("%d", &degree);
@@ -50,6 +52,10 @@ int main() {
         scanf(" %c", &basePoint);
         printf("Use all 1's for coef? (y/n): ");
         scanf(" %c", &pad);
+        if(pad == 'y'){
+            printf("Oscillating? ");
+            scanf(" %c", &osc);
+        }
                 
         while(counter <= degree){
             double coefInput;
@@ -59,7 +65,11 @@ int main() {
                 scanf("%lf", &coefInput);
                 coef[counter] = coefInput;
             }else{
-                coef[counter] = 1;
+                if(osc == 'y' && counter % 2 != 0){
+                    coef[counter] = -1;
+                }else{
+                    coef[counter] = 1;
+                }
             }
             if(basePoint == 'y' && counter < degree){
                 //If there are basepoints add them here
@@ -87,8 +97,8 @@ int main() {
         scanf("%lf", &x);
         printf("X = %lf", x);
         double result =  nest(coef, x, basePoints, degree, basePoint);
-        double closed = (pow(x, 51)-1)/(x-1);
-        printf("\nAt X = %lf the final result = %lf\n Closed: %lf \n Go Again? (y/n):", x, result, closed);
+        //double closed = (pow(x, 51)-1)/(x-1);
+        printf("\nAt X = %lf the final result = %lf\n Go Again? (y/n):", x, result);
         scanf(" %c", &reRun);
         if(reRun != 'y'){
             run = false;
