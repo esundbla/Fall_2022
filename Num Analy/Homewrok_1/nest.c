@@ -97,8 +97,16 @@ int main() {
         scanf("%lf", &x);
         printf("X = %lf", x);
         double result =  nest(coef, x, basePoints, degree, basePoint);
-        //double closed = (pow(x, 51)-1)/(x-1);
-        printf("\nAt X = %lf the final result = %lf\n Go Again? (y/n):", x, result);
+        double closed;
+        if(osc == 'y'){
+            closed = ((1-(pow(pow(x, 2), 50)))/(1-pow(x, 2)))*(1-x);
+        }else{
+            closed = (pow(x, 51)-1)/(x-1);
+        }
+        printf("\nAt X = %lf the final result = %.52lf\n", x, result);
+        printf("closed form result = %.52lf\n Difference= %.52lf\n", closed, (result - closed));
+        printf("go Again? (y/n):");
+        
         scanf(" %c", &reRun);
         if(reRun != 'y'){
             run = false;
