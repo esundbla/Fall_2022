@@ -39,8 +39,6 @@ class MultifunctionPrinter(Printer, Scanner):
     def __init__(self, manufacturer, type, dpi) -> None:
         Printer.__init__(self, manufacturer, type)
         Scanner.__init__(self, manufacturer, dpi)
-        
-
 
     def __str__(self) -> str:
         return self.manufacturer + " " + self.dpi + " " + self.type
