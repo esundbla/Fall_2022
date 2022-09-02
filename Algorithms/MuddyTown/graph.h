@@ -23,6 +23,7 @@ or https://www.amazon.com/exec/obidos/ASIN/0387001638/thealgorithmrepo/
 
 #include <stdbool.h>
 
+
 /* #define _NULL       0       null pointer */
 
 /*	DFS edge types		*/
@@ -52,7 +53,7 @@ typedef struct {
     int nvertices;            /* number of vertices in the graph */
     int nedges;               /* number of edges in the graph */
     int directed;             /* is the graph directed? */
-} graph;
+}graph;
 /* ]]] */
 /* ]]] */
 
