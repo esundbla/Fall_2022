@@ -22,6 +22,8 @@ or https://www.amazon.com/exec/obidos/ASIN/0387001638/thealgorithmrepo/
 
 
 #include <stdbool.h>
+//#include "graph.h"
+
 
 
 /* #define _NULL       0       null pointer */
@@ -53,10 +55,11 @@ typedef struct {
     int nvertices;            /* number of vertices in the graph */
     int nedges;               /* number of edges in the graph */
     int directed;             /* is the graph directed? */
-}graph;
+} graph;
 /* ]]] */
 /* ]]] */
 
+/*
 void process_vertex_early(int v);
 void process_vertex_late(int v);
 void process_edge(int x, int y);
@@ -65,3 +68,4 @@ void initialize_graph(graph *g, bool directed);
 void read_graph(graph *g, bool directed);
 void print_graph(graph *g);
 graph *transpose(graph *g);
+*/

@@ -1,4 +1,4 @@
-/*	ReadWriteTown.c
+/*	Town.c
 
 	Read in and display given town files and write towns out to files 
 */
@@ -6,32 +6,34 @@
 #include <stdio.h>
 #include <string.h>
 
-#include "../graph.h"
+
 #include "../graph.c"
 
-typedef struct ReadWriteTown
+
+typedef struct Town
 {
-	char *townName;
+	char townName[255];
 	graph townMap;
 	
-}ReadWriteTown;
+}Town;
 #define MAXNODES  99
 
-ReadWriteTown readInTown(char *filePath){
+Town readInTown(char filePath[]){
 	char line[255];
-	ReadWriteTown newTown;
+	Town newTown;
 	graph newMap;
-	FILE *fp;
+	FILE * fp;
 	char *token;
 	char delem[2] = ",";
 	char newEdge[3][100];
 	int edgeCount = 0;
-	char *nodesMapping[MAXNODES][100];
+	char nodesMapping[MAXNODES][100];
 
 	initialize_graph(&newMap, false);
-	fopen(filePath, 'r');
+	fp = fopen(filePath, "r");
 
-	fgets(newTown.townName, 255, fp);
+	fgets(line, 255, fp);
+	strcpy(newTown.townName, line);
 
 	while(fgets(line, 255, fp) != NULL){
 		int x;
@@ -42,7 +44,7 @@ ReadWriteTown readInTown(char *filePath){
 		
 		while( token != NULL){
 			strcpy(newEdge[z], token);
-			print( " %s\n", token);
+			printf( " %s\n", token);
 			z++;
 			token = strtok(NULL, delem);
 		}
@@ -69,8 +71,8 @@ ReadWriteTown readInTown(char *filePath){
 }
 
 int main(){
-	char filePath[] = "./MiniTown.dat";
-	ReadWriteTown town = readInTown(&filePath);
+	char filePath[] = "MiniTown.dat";
+	Town town = readInTown(filePath);
 	print_graph(&town.townMap);
 	return 0;
 }
