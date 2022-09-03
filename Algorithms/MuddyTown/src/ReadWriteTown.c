@@ -23,10 +23,10 @@ Town readInTown(char filePath[]){
 	Town newTown;
 	graph newMap;
 	FILE * fp;
+	int vertexCount = 0;
 	char *token;
 	char delem[2] = ",";
 	char newEdge[3][100];
-	int edgeCount = 0;
 	char nodesMapping[MAXNODES][100];
 
 	initialize_graph(&newMap, false);
@@ -39,33 +39,35 @@ Town readInTown(char filePath[]){
 		int x;
 		int y;
 		int weight;
+		line[strcspn(line, "\n")] = 0;
 		token = strtok(line, delem);
 		int z =0;
 		
 		while( token != NULL){
 			strcpy(newEdge[z], token);
-			printf( " %s\n", token);
+			//printf( " %s\n", token);
 			z++;
 			token = strtok(NULL, delem);
 		}
 		weight = atoi(newEdge[0]);
+		int *index;
 		for(int i=1; i<3; i++){
-			int *index;
 			index = (i==1)? &x : &y;
-			for(int j=0; j<MAXNODES; j++){
+			for(int j=0; j<MAXNODES; j++){			
 				if(strcmp(newEdge[i], nodesMapping[j]) == 0){
 					*index = j;
-				}else if(nodesMapping[j] == NULL){
+					break;
+				}else if(strlen(nodesMapping[j]) == 0){
 					strcpy(nodesMapping[j], newEdge[i]);
-					*index = i;
+					*index = j;
+					vertexCount++;
 					break;
 				}
 			}
 		}
-		
 		insert_edge(&newMap, x, y, false, weight);
-		edgeCount++;
 	}
+	newMap.nvertices = vertexCount;
 	newTown.townMap = newMap;
 	return newTown;
 }
@@ -73,6 +75,7 @@ Town readInTown(char filePath[]){
 int main(){
 	char filePath[] = "MiniTown.dat";
 	Town town = readInTown(filePath);
+	printf(" %s", town.townName);
 	print_graph(&town.townMap);
 	return 0;
 }

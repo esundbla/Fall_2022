@@ -48,7 +48,6 @@ void initialize_graph(graph *g, bool directed) {
 /* [[[ insert_edge_cut */
 void insert_edge(graph *g, int x, int y, bool directed, int w) {
     edgenode *p;        /* temporary pointer */
-
     p = malloc(sizeof(edgenode));    /* allocate edgenode storage */
 
     p->weight = w;
@@ -76,7 +75,7 @@ void read_graph(graph *g, bool directed) {
 
     initialize_graph(g, directed);
 
-    scanf("%d %d", &(g->nvertices), &m);
+    scanf("%d %d", &(g->nedges), &m);
 
     for (i = 1; i <= m; i++) {
         scanf("%d %d", &x, &y);
@@ -118,7 +117,7 @@ void print_graph(graph *g) {
     int i;        /* counter */
     edgenode *p;  /* temporary pointer */
 
-    for (i = 1; i <= g->nvertices; i++) {
+    for (i = 0; i < g->nvertices; i++) {
         printf("%d: ", i);
         p = g->edges[i];
         while (p != NULL) {
