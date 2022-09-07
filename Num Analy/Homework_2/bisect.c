@@ -13,7 +13,7 @@ double func(double x, int selector){
             y = (pow(x, 3))-9;
             break;
         case 1:
-            y = (3*pow(x, 3)) + pow(x,2) - x + 5;
+            y = (3*pow(x, 3)) + pow(x,2) - x - 5;
             break;
         case 2:
             y = pow(cos(x), 2) + 6 - x;
