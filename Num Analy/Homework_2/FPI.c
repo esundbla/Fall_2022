@@ -4,20 +4,20 @@
 #include <string.h>
 
 int EQC = 3; 
-char* EQUATIONS[] = {"(x^5)+x-1","6x+5-sin(x)","ln(x)+(x^2)-3"};
+char* EQUATIONS[] = {"1-(x^5)","(5-sin(x))/-6","exp(3-(x^2))"};
 double accuracy;
 
 double func(double x, int selector){
     double y;
     switch(selector) {
         case 0:
-            y = pow(x,5) + x - 1;
+            y = 1 - pow(x,5);
             break;
         case 1:
-            y = 6*x + 5 - sin(x);
+            y = (sin(x) - 5)/6;
             break;
         case 2:
-            y = log(x) + pow(x,2) - 3;
+            y = exp(3-pow(x,2));
             break;
         default :
             printf("Chosen eq failed to match selection: %d", selector);
@@ -27,14 +27,14 @@ double func(double x, int selector){
     return y;
 }
 
-double fixPointItteration(double x, double tol, int eq){
+double fixPointItteration(double x, int iter, int eq){
     double result;
-    double y = INFINITY;
+    double y;
     int counter = 0;
-    while( y  > tol){
+    while(true){
         y = func(x, eq);
         x = y;
-        if(counter > 100){
+        if(counter > iter){
             break;
         }
         counter++;
@@ -45,9 +45,9 @@ double fixPointItteration(double x, double tol, int eq){
 
 int main(){
     
-    int selec;
+    int selec, iter;
     char rr;
-    double tolerance, x, val;
+    double x, val;
     while(true){
         printf("Equations:\n");
         for(int i=0; i < EQC; i++){
@@ -61,11 +61,14 @@ int main(){
         }
         printf("Initial X: ");
         scanf("%lf", &x);
-        printf("Tolerance: ");
-        scanf("%lf", &tolerance);
+        printf("# of iterations: ");
+        scanf("%d", &iter);
 
-        printf("For equation = %s,\nGiven X=%f at tolerance: %lf\n",EQUATIONS[selec],x, tolerance);
-        printf("FPI returned: %.8lf\nAcuraccy: %.12lf\nGo again? (y/n)", val, accuracy);
+
+        val = fixPointItteration(x, iter, selec);
+
+        printf("For equation = %s,\nGiven X=%f for %d itterations\n",EQUATIONS[selec],x, iter);
+        printf("FPI returned: %.8lf\nGo again? (y/n)", val);
         scanf(" %c", &rr);
 
         if(rr != 'y') break;
