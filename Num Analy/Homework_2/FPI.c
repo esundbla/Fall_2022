@@ -3,8 +3,8 @@
 #include <stdbool.h>
 #include <string.h>
 
-int EQC = 3; 
-char* EQUATIONS[] = {"1-(x^5)","(5-sin(x))/-6","exp(3-(x^2))"};
+int EQC = 4; 
+char* EQUATIONS[] = {"1-(x^5)","(5-sin(x))/-6","exp(3-(x^2))","(x-e^x-2)^1/3"};
 double accuracy;
 
 double func(double x, int selector){
@@ -18,6 +18,9 @@ double func(double x, int selector){
             break;
         case 2:
             y = exp(3-pow(x,2));
+            break;
+        case 3:
+            y = cbrt(x-exp(x-2));
             break;
         default :
             printf("Chosen eq failed to match selection: %d", selector);
