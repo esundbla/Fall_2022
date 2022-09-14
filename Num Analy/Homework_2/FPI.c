@@ -2,7 +2,7 @@
 #include <math.h>
 #include <stdbool.h>
 #include <string.h>
-#include <conio.h>
+
 
 int EQC = 13;  //Variable holds count of equations used
 
