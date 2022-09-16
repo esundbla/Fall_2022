@@ -1,11 +1,15 @@
 #include <stdio.h>
+#define _USE_MATH_DEFINES
 #include <math.h>
 #include <stdbool.h>
 #include <string.h>
 
-int EQC = 4; 
-char* EQUATIONS[] = {"1-(x^5)","(5-sin(x))/-6","exp(3-(x^2))","(x-e^x-2)^1/3"};
+
+
+int EQC = 5; 
+char* EQUATIONS[] = {"1-(x^5)","(5-sin(x))/-6","exp(3-(x^2))","(x-e^x-2)^1/3","((10/3)*pow(x,2) + (2/3)*pow(x,3))/((20/3)*x + 2*pow(x,2)"};
 double accuracy;
+
 
 double func(double x, int selector){
     double y;
@@ -22,6 +26,9 @@ double func(double x, int selector){
         case 3:
             y = cbrt(x-exp(x-2));
             break;
+        case 4:
+            y = x - (((((10/3)*M_PI*pow(x,2)) + ((2/3)*M_PI*pow(x,3)))-60) / (((20/3)*M_PI*x) + (2*M_PI*pow(x,2))));
+            break;
         default :
             printf("Chosen eq failed to match selection: %d", selector);
             y = 0;
@@ -37,6 +44,7 @@ double fixPointItteration(double x, int iter, int eq){
     while(true){
         y = func(x, eq);
         x = y;
+        printf("%lf\n", x);
         if(counter > iter){
             break;
         }
@@ -71,7 +79,7 @@ int main(){
         val = fixPointItteration(x, iter, selec);
 
         printf("For equation = %s,\nGiven X=%f for %d itterations\n",EQUATIONS[selec],x, iter);
-        printf("FPI returned: %.8lf\nGo again? (y/n)", val);
+        printf("FM_PI returned: %.8lf\nGo again? (y/n)", val);
         scanf(" %c", &rr);
 
         if(rr != 'y') break;
