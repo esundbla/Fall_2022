@@ -9,6 +9,8 @@ import LexicalAnalyzer.{BLANKS, DIGITS, LETTERS, NEW_LINE, PUNCTUATIONS, SPECIAL
 import scala.io.Source
 import scala.util.control.Breaks._
 
+
+
 class LexicalAnalyzer(private var source: String) extends Iterable[Lexeme]{
 
   var input = ""
@@ -79,59 +81,66 @@ class LexicalAnalyzer(private var source: String) extends Iterable[Lexeme]{
       // returns the next lexeme (or Token.EOF if there isn't any lexeme left to be read)
       override def next(): Lexeme = {
 
-        if (!hasNext)
-          return new Lexeme("eof", Token.EOF)
+        var str = ""
+        if (!hasNext){
+          return new Lexeme("eof", Token.EOF)}
         // TODO: finish the implementation
         
-        else if (hasLetter || getChar == '_' || getChar == '$')
-          var str = getChar + ""
+        else if (hasLetter || getChar == '_' || getChar == '$'){
+          
+          str = str + getChar
           nextChar
           while (!hasBlank && !eof && getChar != ',' && getChar != '{' && getChar != '}')
-            if (hasDigit || hasLetter || getChar == '_' || getChar == '$')
+            if (hasDigit || hasLetter || getChar == '_' || getChar == '$'){
               str = str + getChar.toString
               nextChar
+            }
             else
               throw new Exception("Lexical Analyzer Error: unrecognizable symbol found: " + getChar)
           
           
-          if (str == "class")
-            return new Lexeme(str, Token.CLASS)
+          if (str == "class"){
+            return new Lexeme(str, Token.CLASS)}
+
+          else if (str == "public"){
+            return new Lexeme(str, Token.PUBLIC)}
             
-          else if (str == "public")
-            return new Lexeme(str, Token.PUBLIC)
+          else if (str == "abstract"){
+            return new Lexeme(str, Token.ABSTRACT)}
             
-          else if (str == "abstract")
-            return new Lexeme(str, Token.ABSTRACT)
+          else if (str == "final"){
+            return new Lexeme(str, Token.FINAL)}
             
-          else if (str == "final")
-            return new Lexeme(str, Token.FINAL)
+          else if (str == "extends"){
+            return new Lexeme(str, Token.EXTENDS)}
             
-          else if (str == "extends")
-            return new Lexeme(str, Token.EXTENDS)
-            
-          else if (str == "implements")
-            return new Lexeme(str, Token.IMPLEMENTS)
+          else if (str == "implements"){
+            return new Lexeme(str, Token.IMPLEMENTS)}
       
-          else
+          else{
             return new Lexeme(str, Token.IDENTIFIER)
-            
-        else if (hasSpecial)
-          if (getChar == '{')
-            val str = getChar + ""
+          }
+        }
+        else if (hasSpecial){
+          if (getChar == '{'){
+            var str = getChar + ""
             nextChar
             return new Lexeme(str, Token.BLOCK_OPEN)
-  
-          else if (getChar == '}')
-            val str = getChar + ""
+          }
+          else if (getChar == '}'){
+            var str = getChar + ""
             nextChar
             return new Lexeme(str, Token.BLOCK_CLOSE)
-
-        else if (hasPunctuation)
-          if(getChar == ',')
-            val str = getChar + ""
+          }
+        }
+        else if (hasPunctuation){
+          if(getChar == ','){
+            var str = getChar + ""
             nextChar
             return new Lexeme(str, Token.COMMA)
-        
+          }
+        }
+               
         // throw an exception if an unrecognizable symbol is found
         throw new Exception("Lexical Analyzer Error: unrecognizable symbol found: " + getChar)
       }

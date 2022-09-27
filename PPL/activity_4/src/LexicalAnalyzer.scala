@@ -84,7 +84,7 @@ class LexicalAnalyzer(private var source: String) extends Iterable[Lexeme]{
           return new Lexeme("eof", Token.EOF)
 
         if (hasLetter) {
-            val str = getChar + ""
+            val str = ""
             nextChar
             return new Lexeme(str, Token.IDENTIFIER)
         }

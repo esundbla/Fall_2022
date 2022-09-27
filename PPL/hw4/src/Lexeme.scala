@@ -4,8 +4,9 @@
  * Description: Homework 04 - Lexeme: a symbol with an optional token value
  * Student Name: Erik Sundblad
  */
+package Lexeme
 
-class Lexeme(var label: String, var token: Token.Value = null) {
+class exeme(var label: String, var token: Token.Value = null) {
   override def toString: String = {
     var s = s"Lexeme($label"
     if (token != null)
