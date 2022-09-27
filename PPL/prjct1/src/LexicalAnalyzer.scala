@@ -132,8 +132,7 @@ class LexicalAnalyzer(private var source: String) extends Iterable[Lexeme] {
             nextChar
             new Lexeme(str, Token.INPUT)
           }
-          else if (getChar == ';')
-          {
+          else if (getChar == ';') {
             nextChar
             while (getChar != '\n') {
               str += getChar
@@ -142,10 +141,10 @@ class LexicalAnalyzer(private var source: String) extends Iterable[Lexeme] {
             str += getChar //Get that last newline charecter
             nextChar
             new Lexeme(str, Token.COMMENT)
+          } else {
+            throw new Exception("Invalid char: " + getChar)
           }
         }
-
-/*
         else if (hasSpecial) {
           var str = getChar + ""
 
@@ -232,10 +231,10 @@ class LexicalAnalyzer(private var source: String) extends Iterable[Lexeme] {
             }else {
               throw new Exception("Invalid End Of Program, required 2, $ but only got 1")
             }
+          }else{
+            throw new Exception("Invalid charecter: " + getChar)
           }
         }
-
-         */
         else {
           // throw an exception if an unrecognizable symbol is found
           throw new Exception("Lexical Analyzer Error: unrecognizable symbol \"" + getChar + "\" found!")

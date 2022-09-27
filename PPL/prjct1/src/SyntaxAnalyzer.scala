@@ -85,32 +85,36 @@ class SyntaxAnalyzer(private var source: String) {
   // TODO: statement = ´?´ | ´!´ | string | identifier | ´=´ | literal | ´+´ | ´-´ | ´*´ | ´/´ | ´%´ | ´<´ | ´<=´ | ´>´ | ´>=´ | ´==´ | ´!=´ | ´^´ | ´.´ |  | if | while
   private def parseStatement: Node = {
     val node = new Node(new Lexeme("statement"))
-    if (isStatement(getLexeme.token)) //grab if not if or while
+    if (isStatement(getLexeme.token)) { //grab if not if or while
       node.add(new Node(getLexeme))
-    if (getLexeme.token == Token.OPEN_BRACKET) {
-      nextLexeme
-      node.add(parseIf)
-      if (getLexeme.token == Token.CLOSE_BRACKET) { //after if statement we need a closing bracket or throw error
-        node.add(new Node(getLexeme))
+      if (getLexeme.token == Token.OPEN_BRACKET) {
         nextLexeme
+        node.add(parseIf)
+        if (getLexeme.token == Token.CLOSE_BRACKET) { //after if statement we need a closing bracket or throw error
+          node.add(new Node(getLexeme))
+          nextLexeme
+        }
+        else {
+          throw new Exception("Expected closing bracket { but got " + getLexeme)
+        }
+      }
+      else if (getLexeme.token == Token.OPEN_PAR) { //if open Par then move to while parse
+        nextLexeme
+        node.add(parseWhile)
+        if (getLexeme.token == Token.CLOSE_PAR) { //after if statement we need a closing par or throw error
+          node.add(new Node(getLexeme))
+          nextLexeme
+        }
+        else {
+          throw new Exception("Expected closing par ( but got " + getLexeme)
+        }
       }
       else {
-        throw new Exception("Expected closing bracket { but got " + getLexeme)
-      }
-    }
-    else if (getLexeme.token == Token.OPEN_PAR) { //if open Par then move to while parse
-      nextLexeme
-      node.add(parseWhile)
-      if (getLexeme.token == Token.CLOSE_PAR) { //after if statement we need a closing par or throw error
-        node.add(new Node(getLexeme))
         nextLexeme
       }
-      else {
-        throw new Exception("Expected closing par ( but got " + getLexeme)
-      }
-    }
-   else
+    }else {
       throw new Exception("Invalid element for statement: " + getLexeme)  //invalid token throw exception
+    }
 
     node
   }
