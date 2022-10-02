@@ -62,9 +62,9 @@ class SyntaxAnalyzer(private var source: String) {
   private def parseMouse: Node = {
     val node = new Node(new Lexeme("mouse"))
     while(getLexeme.token != Token.EO_PRG)          //loop through calling parseline till we get to $$
-      node.add(parseLine)       //parse the line  
+      node.add(parseLine)       //parse the line
 
-    node.add(new Node(getLexeme))   //return $$ node 
+    node.add(new Node(getLexeme))   //return $$ node
     node
   }
 
@@ -78,38 +78,21 @@ class SyntaxAnalyzer(private var source: String) {
     else {
       node.add(parseStatement)
     }
-
     node
   }
 
   // TODO: statement = ´?´ | ´!´ | string | identifier | ´=´ | literal | ´+´ | ´-´ | ´*´ | ´/´ | ´%´ | ´<´ | ´<=´ | ´>´ | ´>=´ | ´==´ | ´!=´ | ´^´ | ´.´ |  | if | while
   private def parseStatement: Node = {
     val node = new Node(new Lexeme("statement"))
-    if (isStatement(getLexeme.token)) { //grab if not if or while
-      node.add(new Node(getLexeme))
+    if (isStatement(getLexeme.token)) {
       if (getLexeme.token == Token.OPEN_BRACKET) {
-        nextLexeme
         node.add(parseIf)
-        if (getLexeme.token == Token.CLOSE_BRACKET) { //after if statement we need a closing bracket or throw error
-          node.add(new Node(getLexeme))
-          nextLexeme
-        }
-        else {
-          throw new Exception("Expected closing bracket { but got " + getLexeme)
-        }
       }
       else if (getLexeme.token == Token.OPEN_PAR) { //if open Par then move to while parse
-        nextLexeme
         node.add(parseWhile)
-        if (getLexeme.token == Token.CLOSE_PAR) { //after if statement we need a closing par or throw error
-          node.add(new Node(getLexeme))
-          nextLexeme
-        }
-        else {
-          throw new Exception("Expected closing par ( but got " + getLexeme)
-        }
       }
       else {
+        node.add(new Node(getLexeme)) //add statements that arent open or close bracket
         nextLexeme
       }
     }else {
@@ -122,19 +105,29 @@ class SyntaxAnalyzer(private var source: String) {
   // TODO: if = ´[´ { line } ´]´
   def parseIf: Node = {
     val node = new Node(new Lexeme("if"))
-    while(getLexeme.token != Token.CLOSE_BRACKET && getLexeme.token != Token.EO_PRG)
+    node.add(new Node(getLexeme))
+    nextLexeme
+    while(getLexeme.token != Token.CLOSE_BRACKET) {
       node.add(parseLine)
+    }
+    node.add(new Node(getLexeme))
+    nextLexeme
     node
-  }
+  }//parse if
 
   // TODO: while = ´(´ { line } ´)´
   def parseWhile: Node = {
     val node = new Node(new Lexeme("while"))
-    while(getLexeme.token != Token.CLOSE_PAR && getLexeme.token != Token.EO_PRG)
+    node.add(new Node(getLexeme))
+    nextLexeme
+    while(getLexeme.token != Token.CLOSE_PAR) {
       node.add(parseLine)
+    }
+    node.add(new Node(getLexeme))
+    nextLexeme
     node
-  }
-}
+  }//parse while
+}//syntax analyzer
 
 object SyntaxAnalyzer {
   def main(args: Array[String]): Unit = {

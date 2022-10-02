@@ -81,13 +81,14 @@ class LexicalAnalyzer(private var source: String) extends Iterable[Lexeme] {
           new Lexeme("eof", Token.EOF)
         }
         else if (getChar == '"') {
+          nextChar
           var str = getChar + ""
           nextChar
           while (getChar != '"') {
             str += getChar
             nextChar
           }
-          str += getChar //get the quotation marks
+
           nextChar
           new Lexeme(str, Token.STRING)
         }

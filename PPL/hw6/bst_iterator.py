@@ -64,9 +64,12 @@ class BST:
 
     # TODO #2: return the label of the first element from the list that you built in __iter__, updating the list before returning; hint: don't worry if the list is empty (the exception that is going to be thrown is used to notify that there are no more elements to return)
     def __next__(self):
-        val = self.nodes[0]
-        self.nodes = self.nodes[1:]
-        return val
+        if len(self.nodes) > 0:
+            val = self.nodes.pop(0)
+            return val
+        else:
+            raise StopIteration
+            
 
 # the code below builds and prints a tree using the given labels
 tree = BST(["b", "a", "d", "c", "e"])

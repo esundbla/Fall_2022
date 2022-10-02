@@ -5,14 +5,12 @@
 #include <string.h>
 
 
-<<<<<<< HEAD
 
 int EQC = 5; 
 char* EQUATIONS[] = {"1-(x^5)","(5-sin(x))/-6","exp(3-(x^2))","(x-e^x-2)^1/3","((10/3)*pow(x,2) + (2/3)*pow(x,3))/((20/3)*x + 2*pow(x,2)"};
 double accuracy;
 
 
-=======
 int EQC = 13;  //Variable holds count of equations used
 
 
@@ -27,7 +25,6 @@ double accuracy;
 *Function implements provided equations and holds switch statement to select 
 *returns a double of the output of given eq.
 */
->>>>>>> 40f4baae7791cad92a0b3e97b22e1c76f1619dd2
 double func(double x, int selector){
     double y;
     switch(selector) {
