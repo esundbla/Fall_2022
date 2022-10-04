@@ -17,6 +17,7 @@ class MouseInterpreter(private var parseTree: Node) {
   // set this to true to get detailed debug info
   val DEBUG = true
 
+
   // displays the state of the stack and the memory for debug purposes
   def displayStackAndMemory = {
     // show stack
