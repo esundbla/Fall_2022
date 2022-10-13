@@ -2,5 +2,6 @@
     "files.associations": {
         "ios": "c",
         "xiosbase": "c"
-    }
+    },
+    "python.analysis.typeCheckingMode": "basic"
 }
