@@ -35,14 +35,13 @@ def decomp(mtx, n):
             L[l][i] = (mtx[l][i]-sum) / U[i][i] # Calulating L values
 
 
-    
     return L, U
 
 def matrix_printer(mtx, n):
     """Helper function for fancy print output"""
     for i in range(n):
         for j in range(n):
-            print("{:.2f}".format(mtx[i][j]), end="  ")
+            print("{:.3f}".format(mtx[i][j]), end="  ")
         print("\n")
 
 
