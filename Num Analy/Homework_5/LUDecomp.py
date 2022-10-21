@@ -23,7 +23,7 @@ def decomp(mtx, n):
             if i > 0:                           # Python indexing from 0,0 requires special conditions at i=0 range will run on a negative value
                 for k in range(i):              # Summation fucntion for given row
                     sum += L[i][k] * U[k][j]
-                    print(sum)
+                    #print(sum)
             U[i][j] = mtx[i][j] - sum           # given - value 
         
         for l in range(i+1,n):                  # Loop to fill lower matrix
@@ -31,7 +31,7 @@ def decomp(mtx, n):
             if i > 0:                           # Python indexing from 0,0 requires special conditions at i=0 range will run on a negative value
                 for m in range(i):              # Summation loop  
                     sum += L[l][m] * U[m][i]
-                    print(sum)
+                    #print(sum)
             L[l][i] = (mtx[l][i]-sum) / U[i][i] # Calulating L values
 
 

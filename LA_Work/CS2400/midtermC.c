@@ -15,8 +15,8 @@ int main(){
 }
 */
 void main(){
-    int x, e;
-    int r = 1;                                       //Three variables to hold input $s0, $s1, $s2
+    int x, e;                                       //Two variables to hold input $s0, $s1
+    int r = 1;                                      //Results variable $s2
     
     printf("Input the value of the base: ");        //Ask for user input
     scanf("%d", &x);                                //Store input into x
