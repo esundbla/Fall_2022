@@ -5,7 +5,7 @@ Erik Sundblad
 """
 STRINGMAX = 100
 STRINGS1 = ["hello","hi","chao","hola","greetings","bonjour","salam"]
-STRINGS2 = ["catg", "ctaagt", "gcta", "ttca", "atgcatc"]
+STRINGS2 = ["ABRACA","RACADA","ACADAB","CADABR","ADABRA"]
 
 class Node:
     """Node class for graph"""
@@ -68,6 +68,7 @@ class Graph:
     
     
     def bestString(self):
+        
         strings = []
         self.unVisit()
         for node in self.nodes:

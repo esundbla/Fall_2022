@@ -101,7 +101,7 @@ object Sudoku {
 
 
   def main(args: Array[String]): Unit = {
-    val board = readBoard("sudoku3.txt")
+    val board = readBoard("sudoku1.txt")
     //println(boardToString(board))
     //println(getBox(board, 2, 2).mkString(""))
     //println(isValid(Array(0, 1, 2, 3, 4, 5, 6)))
