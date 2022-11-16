@@ -11,7 +11,7 @@ def masking(bgr, low, high):
   mask = cv.inRange(src, np.array([10,120,100]),np.array([25,255,255]))
   result = cv.bitwise_and(src, src, mask= mask)
   return result
-s
+
 
 
 if __name__ == "__main__":

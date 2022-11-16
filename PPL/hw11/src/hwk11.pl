@@ -2,8 +2,8 @@ sum([], 0).                                                 %Sum base case of em
 sum([X|T], Z) :- sum(T, Y), Z  is X + Y.                    %Recursive call adding results
 
 max([X|[]], X).                                             %Base case set of 1 return 1
-max([X1,X2|T], Z) :- X1 >= X2,   max([X1|T], F), Z is F.    %Case of greater than or equals
-max([X1,X2|T], Z) :- X1 < X2,   max([X2|T], F), Z is F.     %Casse of less than 
+max([X1,X2|T], Z) :- X1 >= X2,   max([X1|T], Z).            %Case of greater than or equals
+max([X1,X2|T], Z) :- X1 < X2,   max([X2|T], Z).             %Casse of less than 
 
 %______________Tests________________________%
 
