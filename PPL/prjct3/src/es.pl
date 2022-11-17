@@ -22,10 +22,10 @@ member(X, [_ | T]) :-member(X, T).
 is_option(Question, Options) :-
   (
     opt(Question, Options) ->
-      true;
+      true; opt(not(Question), Options) -> false;
       format('~w?~n', [Question]),
       read(Answer),
-      ( member(Answer, Options) -> assert(opt(Question, Options)); assert(opt(not(Question), Options)) )
+      ( member(Answer, Options) -> assert(opt(Question, Options)); assert(opt(not(Question), Options)), false )
   ).
 
 fruit(pinnaple) :- not(is_true('is Speherical')), is_true('is Spikey').
@@ -41,11 +41,12 @@ fruit(cherry) :- is_true('is Speherical'), is_true('is Sweet'), is_true('is Ston
 fruit(plum) :- is_true('is Speherical'), is_true('is Sweet'), is_true('is Stonefruit'), not(is_true('is Small')), is_true('is Purple').
 fruit(apricot) :- is_true('is Speherical'), is_true('is Sweet'), is_true('is Stonefruit'), not(is_true('is Small')), not(is_true('is Purple')).
 fruit(apple) :- is_true('is Speherical'), is_true('is Sweet'), not(is_true('grows on vine')).
-fruit(melon) :- is_true('is Speherical'), is_true('is Sweet'), is_option('flesh color?', [green, orange]).
-fruit(grape) :- is_true('is Speherical'), is_true('is Sweet'), not(is_option('flesh color?', [green, orange])).
+fruit(melon) :- is_true('is Speherical'), is_true('is Sweet'), is_option('what is the color of the flesh', [green, orange]).
+fruit(grape) :- is_true('is Speherical'), is_true('is Sweet'), not(is_option('what is the color of the flesh', [green, orange])).
 
 
-begin :- ( fruit(A) -> format('I think your fruit is a ~w.~n', [A]); false ),
-         (is_true('Is this the right fruit') -> format('Nice enjoy that ~w.~nFeel free to play again just type begin.', [A]); format('No way my mistake ~nWell feel free to play again simply type begin.')),
+begin :- format('Welcome to fruits of the world~nI will try to geuse the fruit you are thinking of through questions~nPLease answer yes. or no.~n'),
+         is_true('Ready'),
+         ( fruit(A) -> format('I think your fruit is a ~w.~n', [A]); false ),
+         (is_true('Is this the right fruit') -> format('Nice enjoy that ~w.~nFeel free to play again just type begin.', [A]); format('No way! My mistake ~nWell feel free to play again simply type begin.')),
          retractall(fact(_)), retractall(opt(_,_)).
-
