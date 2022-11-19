@@ -8,7 +8,7 @@ def masking(bgr, low, high):
   length, width, extra = bgr.shape
   # Thresholding done by direct anlysis of images 
   # Potentially will be optomized through open/close transformations
-  mask = cv.inRange(src, np.array([10,120,100]),np.array([25,255,255]))
+  mask = cv.inRange(src, np.array([185,125,0]),np.array([255,255,100]))
   result = cv.bitwise_and(src, src, mask= mask)
   return result
 
