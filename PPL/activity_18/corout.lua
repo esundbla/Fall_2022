@@ -1,14 +1,19 @@
-function say_hi(n)
-    for i = 1, n do
-        coroutine.yield(i, "hi!")
+function producer()
+    while true do
+        coroutine.yield(
+            io.read()
+        )    
     end
 end
 
-cr = coroutine.create(
-    say_hi
-)
--- having yield returns values
--- note that the last return is the function's final return
-while coroutine.status(cr) ~= "dead" do
-    print(coroutine.resume(cr, 10))
+function consumer(prd)
+    status = true
+    while status do
+        local status, value = coroutine.resume(prd)
+        print(value)
+    end
 end
+
+prd = coroutine.create(producer)
+cns = coroutine.create(consumer)
+coroutine.resume(cns, prd)
