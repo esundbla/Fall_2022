@@ -42,21 +42,22 @@ bst = {
 
 -- TODO #2: write an iterator using in_order
 function my_iterator(bst)
-    local co = coroutine.create(function (bst)
-        return in_order(bst)
-    end)
-
-    function ()
-    
+    local cr = coroutine.create(in_order)
+    return function()
+            local status, el = coroutine.resume(cr, bst)
+            if status then
+                return el
+            end
+            return nil
+        end
     end
-        
-    end
 
-end
+
 
 -- TODO #1: test the coroutine manually
-cc  = coroutine.create(in_order)
-print(coroutine.resume(cc, bst))
-print(coroutine.resume(cc, bst))
+cr  = coroutine.create(in_order)
+print(coroutine.resume(cr, bst))
+print(coroutine.resume(cr, bst))
 
 -- TODO #3: test your iterator 
+
