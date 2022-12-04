@@ -37,18 +37,12 @@ object Examples {
   }
 
   // TODO #2: f) write function primeFactorsMult similar to primeFactors but with the prime factors and their multiplicity.
-  def primeRange(x: Int): IndexedSeq[Int] = {
-    var result = IndexedSeq[Int]()
-    val factors = primeFactors(x)
-    val minPrime = factors(0)
-    if (isPrime(x))
-      result = result :+ x
-    else if (gcd(minPrime, x) == minPrime) {
-      //println(minPrime)
-      result = result :+ minPrime
-      result = result ++ primeRange(x / minPrime)
-    }
-    result
+  def primeFactorMult(x: Int)={
+    for{
+      b <- primeFactors(x)
+      e <- 1 to x
+      if math.pow(b,e) == x || (x%math.pow(b,e) < x && x % math.pow(b,e) == 0 && x/math.pow(b,e) % b != 0)
+    }yield(b,e)
   }
 
   // TODO #3: g) write function primesRange that takes a range of integers and returns a list of all prime numbers within that range.
@@ -61,25 +55,25 @@ object Examples {
     for {
       a <- primesRange(2,x)
       b <- primesRange(2,x)
-      if a +b == x
+      if a +b == x && a >= b // greater than saves us from list duplicates
     }yield (a,b)
   }
 
   // OPTIONAL TODO #2: i) write the function goldbachList that takes a range of integers and returns a list of all even numbers and their Goldbach composition.
   def goldbachList(a: Int, b: Int) = {
-    (a to b).filter((r: Int) => r%2 == 0).map((f:Int) => (f,goldbach(f)))
+    (a to b).filter((r: Int) => r%2 == 0).map((f:Int) => (f,goldbach(f).mkString(" ")))
   }
 
   def main(args: Array[String]): Unit = {
-    println(primeFactors(1432))
-    println(primeFactors(179))
-    println(primeFactors(9))
-    println(totientPhi(50))
-    println(primesRange(2,70))
-    println(primeRange(84))
-    println(goldbach(88))
-    println(primesRange(2,100))
-    println(goldbachList(4,18))
+    println(primeFactors(1432).mkString(" "))
+    println(primeFactors(179).mkString(" "))
+    println(primeFactors(9).mkString(" "))
+    println(totientPhi(50).mkString(" "))
+    println(primesRange(2,70).mkString(" "))
+    println(primeFactorMult(360).mkString(" "))
+    println(goldbach(22).mkString(" "))
+    println(primesRange(2,100).mkString(" "))
+    println(goldbachList(4,18).mkString(" "))
 
 
   }
