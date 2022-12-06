@@ -7,6 +7,7 @@ package main
 
 import (
 	"fmt"
+	"math/rand"
 	"sync"
 	"time"
 )
@@ -70,20 +71,29 @@ func main() {
 	const MAX_INT = 10000 // upperbound of the numbers in the array
 
 	// TODO: declare an array of size N
-
+	var data [N]int
 	// TODO: populate the array with random integers from [0, MAX_INT)
-
+	for i :=0; i<N; i++{
+		data[i] = rand.Intn(MAX_INT)
+	}
 	// begin timing
 	start := time.Now()
+
 	// uncomment this line to sort the array altogether
-	// sort(data[:])
+	//sort(data[:])
 
 	// TODO: split the array in 2 slices
+	slice_1 := data[: len(data)/2 ]
+	slice_2 := data[len(data)/2:]
 
 	// TODO: create 2 goroutines to sort the array in parallel
-
+	
+	wg.Add(2)
+	go sort(slice_1)
+	go sort(slice_2)
+	wg.Wait()
 	// TODO: merge the 2 slices (now sorted)
-
+	merge(slice_1, slice_2)
 	// show how long it took
 	fmt.Println(time.Since(start))
 }
