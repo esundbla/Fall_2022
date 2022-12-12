@@ -5,6 +5,7 @@
 
 PROPOSALS = 3
 VOTERS    = 1000000
+time = os.clock()
 
 -- TODO #1: create a ballot and randomly assign 0 (no) or 1 (yes) to each proposal; then begin a timed loop of up to 10s (also random); at each iteration the function should yield; at the end of the loop, insert the ballot in the (given) ballot_box
 function vote(ballot_box)
@@ -34,7 +35,6 @@ function tally_results(ballot_box)
 end
 -- TODO #3: time when the election started
 
-time = os.clock()
 
 -- TODO #4: create a ballot_box
 ballot_box = {}
