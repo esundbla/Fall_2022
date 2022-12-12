@@ -7,7 +7,7 @@ PROPOSALS = 3
 VOTERS    = 1000000
 
 -- TODO #1: create a ballot and randomly assign 0 (no) or 1 (yes) to each proposal; then begin a timed loop of up to 10s (also random); at each iteration the function should yield; at the end of the loop, insert the ballot in the (given) ballot_box
-function vote(ballot_box)
+function vote()
     local ballot  = {}
     for i=1, PROPOSALS do
         ballot[i] = math.random(0,1)
@@ -20,7 +20,7 @@ function vote(ballot_box)
 end
 
 -- TODO #2: return a tally of the results as a percent of 1s (yes) that was given to each proposal
-function tally_results(ballot_box) 
+function tally_results() 
     local result = {0,0,0}
     for j=1, VOTERS do
         for i=1, PROPOSALS do
@@ -48,14 +48,14 @@ local run = true
 while(run) do
     run = false
     for i=1, VOTERS do
-        if coroutine.resume(voting[i], ballot_box) then
+        if coroutine.resume(voting[i]) then
             run = true
         end
     end
 end
 -- TODO #6: display the results
 
-local result = tally_results(ballot_box)
+local result = tally_results()
 print("Election Results:\n1", result[1], "\n2", result[2], "\n3", result[3])
 -- TODO #7: show how long the election took in seconds
-print("Time elapsed:", time, "seconds!")
+print("Time elapsed:", os.clock() - time, "seconds!")

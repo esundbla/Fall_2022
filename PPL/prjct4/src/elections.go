@@ -21,6 +21,7 @@
  
 // TODO #1: create a ballot and randomly assign 0 (no) or 1 (yes) to each proposal; then sleep for up to 10s (also random); at the end of the loop, write the ballot to the (given) ballot_box channel
  func vote(ballot_box chan<- [PROPOSALS]int) {
+	
 	 
  }
  
